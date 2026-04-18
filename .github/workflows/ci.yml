@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    env:
+      MOVIE_CATALOG_EMAIL: ${{ secrets.MOVIE_CATALOG_EMAIL }}
+      MOVIE_CATALOG_PASSWORD: ${{ secrets.MOVIE_CATALOG_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore packages
+        run: dotnet restore MovieCatalogApiTests.sln
+
+      - name: Build solution
+        run: dotnet build MovieCatalogApiTests.sln --no-restore
+
+      - name: Run tests
+        run: dotnet test MovieCatalogApiTests.sln --no-build --verbosity normal
