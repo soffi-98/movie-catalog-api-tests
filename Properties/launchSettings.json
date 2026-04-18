@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "MovieCatalogApiTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "MOVIE_CATALOG_EMAIL": "sophie_nedelcheva@outlook.com",
+        "MOVIE_CATALOG_PASSWORD": "Mechen4ence1!"
+      }
+    }
+  }
+}
